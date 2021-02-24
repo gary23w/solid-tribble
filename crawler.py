@@ -5,8 +5,9 @@ import sys
 import datetime
 from data import constants
 from core import Graph, Trends, SendMail
+import subprocess
 
-
+#crawl and gather twitter data
 def twitter_intel(user_name, text = ""):
     date_ = datetime.date.today()
     user = twint.Config()
@@ -27,22 +28,24 @@ def twitter_intel(user_name, text = ""):
     print("checking object")
     return "json stored"
 
+#Build mock twitter dataset
 def find_trends():
     print("[*] looking for trends")
     obj = open('response.json', "r")
     for i in obj.readlines():
+        print("[!] Building DATASET")
         cn = i.split("\n")
         js1 = cn[0] # prepare to load json
         js2 = json.loads(js1)
         trend.analyze_data(js2['tweet'], js2['username'], js2['name'])
-
+#
 def md5(string):
     md5encrypt = "http://api.hashify.net/hash/md4/hex?value=" + str(string)
     encrypt = requests.get(md5encrypt)
     json_ = encrypt.json()
     final_string = json_['Digest']
     return final_string
-
+#Mock UI
 def user_interface():
     myF = input("[*] custom search? (y/n) ")
     if myF == "y":
@@ -70,20 +73,14 @@ def user_interface():
             except KeyboardInterrupt:
                 print("oops")
 
-def create_key():
-    key = md5("frig")
-
 def clean_():
-    cj = open("response.json", "w")
-    cj.write("")
-    cj.close()
-    dt = open("daily.txt", "w")
-    dt.write("")
-    dt.close()
+    with open("response.json", "w") as a, open("daily.txt", "w") as b:
+        a,b.write("")
 
 clean_()
 print("[*] Gathering third party intel...")
 trend = Trends.TrendResearch()
+#trend.nlp_()
 trend.researchBot()
 print("[*] Top trenders =>")
 daily = open("daily.txt", "r")

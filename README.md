@@ -17,18 +17,19 @@ pip3 install -r requirements.txt
 ```
 
 
-## Deployment
+## Run
 ```
 python3 crawler.py
 ```
-
+- Follow the prompts.
+- Select "y" for customsearch.
 
 ## Built With
 
 * [Twint](https://pypi.org/project/twint/) - Twitter intelligence
 * [Pygal](http://www.pygal.org/en/stable/) - Sexy python charting
 * [BeautifulSoup4](https://pypi.org/project/beautifulsoup4/) - Sexy python scraping
-
+* [NLTK](http://www.nltk.or/) - NLTK
 
 ## License
 
